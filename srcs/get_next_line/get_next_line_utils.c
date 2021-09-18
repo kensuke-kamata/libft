@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/06 10:04:38 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/06 14:25:57 by kkamata          ###   ########.fr       */
+/*   Created: 2021/08/26 08:41:37 by kkamata           #+#    #+#             */
+/*   Updated: 2021/09/09 19:48:31 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "get_next_line.h"
 
-int	ft_atoi(const char *str)
+void	clearfd(t_fd **fdlst, t_fd *target)
 {
-	int64_t	res;
-	int8_t	sign;
+	t_fd	*tmp;
 
-	while (ft_isspace(*str))
-		str++;
-	sign = 1;
-	if (*str == '-' || *str == '+')
+	if (!fdlst || !(*fdlst))
+		return ;
+	if (*fdlst == target)
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		*fdlst = target->next;
+		free(target->content);
+		free(target);
+		return ;
 	}
-	res = 0;
-	while (ft_isdigit(*str))
-	{
-		if (res > (LONG_MAX - (*str - '0')) / 10)
-		{
-			if (sign == 1)
-				return ((int)LONG_MAX);
-			if (sign == -1)
-				return ((int)LONG_MIN);
-		}
-		res = (res * 10) + (*str++ - '0');
-	}
-	return ((int)res * sign);
+	tmp = *fdlst;
+	while (tmp && (tmp->next != target))
+		tmp = tmp->next;
+	tmp->next = target->next;
+	free(target->content);
+	free(target);
 }
