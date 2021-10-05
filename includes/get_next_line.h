@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 08:39:59 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/28 14:35:30 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/10/05 21:07:18 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 #  define BUFFER_SIZE 256
 # endif
 
-# define SUCCESS 1
-# define ENDOFFILE 0
-# define ERROR -1
+# define GNLSUC 1
+# define GNLEOF 0
+# define GNLERR -1
 
 // +------------------------------------------+ //
 //   Type definition                            //

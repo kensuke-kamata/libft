@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 08:39:13 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/16 14:05:39 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/10/05 21:09:23 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static int	return_new_line(t_fd *target, char *nptr, char **res)
 		*res = ft_strndup(target->content, nptr - (target->content) + 1);
 		tmp = ft_strndup(nptr + 1, ft_strlen(nptr + 1));
 		if (!*res || !tmp)
-			return (ERROR);
+			return (GNLERR);
 		free(target->content);
 		target->content = tmp;
-		return (SUCCESS);
+		return (GNLSUC);
 	}
 	else
 	{
@@ -38,7 +38,7 @@ static int	return_new_line(t_fd *target, char *nptr, char **res)
 			free(target->content);
 			target->content = tmp;
 		}
-		return (ENDOFFILE);
+		return (GNLEOF);
 	}
 }
 
@@ -55,13 +55,13 @@ static int	readfd(t_fd *target, char *buf, char **res)
 			break ;
 		cc = read(target->value, buf, BUFFER_SIZE);
 		if (cc == -1)
-			return (ERROR);
+			return (GNLERR);
 		if (cc == 0)
 			break ;
 		buf[cc] = '\0';
 		tmp = ft_strjoin(target->content, buf);
 		if (!tmp)
-			return (ERROR);
+			return (GNLERR);
 		free(target->content);
 		target->content = tmp;
 	}
@@ -123,9 +123,9 @@ char	*get_next_line(int fd)
 	res = NULL;
 	status = readfd(target, buf, &res);
 	free(buf);
-	if (status == ENDOFFILE || status == ERROR)
+	if (status == GNLEOF || status == GNLERR)
 		clearfd(&fdlst, target);
-	if (status == ERROR)
+	if (status == GNLERR)
 		return (NULL);
 	return (res);
 }
