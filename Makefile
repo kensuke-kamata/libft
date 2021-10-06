@@ -38,13 +38,13 @@ SRCS		= $(LIBDIR)ft_atoi.c        $(LIBDIR)ft_bzero.c        $(LIBDIR)ft_calloc.
 			  $(LIBDIR)ft_memmove.c     $(LIBDIR)ft_memset.c       $(LIBDIR)ft_numlen_base.c \
 			  $(LIBDIR)ft_numlen.c      $(LIBDIR)ft_putchar_fd.c   $(LIBDIR)ft_putendl_fd.c \
 			  $(LIBDIR)ft_putnbr_base.c $(LIBDIR)ft_putnbr_fd.c    $(LIBDIR)ft_putstr_fd.c \
-			  $(LIBDIR)ft_split.c       $(LIBDIR)ft_strchr.c       $(LIBDIR)ft_strdup.c \
-			  $(LIBDIR)ft_striteri.c    $(LIBDIR)ft_strjoin.c      $(LIBDIR)ft_strlcat.c \
-			  $(LIBDIR)ft_strlcpy.c     $(LIBDIR)ft_strlen.c       $(LIBDIR)ft_strmapi.c \
-			  $(LIBDIR)ft_strncmp.c     $(LIBDIR)ft_strndup.c      $(LIBDIR)ft_strnstr.c \
-			  $(LIBDIR)ft_strrchr.c     $(LIBDIR)ft_strstr.c       $(LIBDIR)ft_strtrim.c \
-			  $(LIBDIR)ft_substr.c      $(LIBDIR)ft_tolower.c      $(LIBDIR)ft_toupper.c \
-			  $(LIBDIR)ft_uitoa.c \
+			  $(LIBDIR)ft_split.c       $(LIBDIR)ft_strchr.c       $(LIBDIR)ft_strcmp.c \
+			  $(LIBDIR)ft_strdup.c      $(LIBDIR)ft_striteri.c     $(LIBDIR)ft_strjoin.c \
+			  $(LIBDIR)ft_strlcat.c     $(LIBDIR)ft_strlcpy.c      $(LIBDIR)ft_strlen.c \
+			  $(LIBDIR)ft_strmapi.c     $(LIBDIR)ft_strncmp.c      $(LIBDIR)ft_strndup.c \
+			  $(LIBDIR)ft_strnstr.c     $(LIBDIR)ft_strrchr.c      $(LIBDIR)ft_strstr.c \
+			  $(LIBDIR)ft_strtrim.c     $(LIBDIR)ft_substr.c       $(LIBDIR)ft_tolower.c \
+			  $(LIBDIR)ft_toupper.c     $(LIBDIR)ft_uitoa.c \
 			  $(GNLDIR)get_next_line.c  $(GNLDIR)get_next_line_utils.c \
 			  $(PRIDIR)ft_printf.c      $(PRIDIR)char.c            $(PRIDIR)str.c \
 			  $(PRIDIR)int.c            $(PRIDIR)uint.c            $(PRIDIR)hex.c \
@@ -57,14 +57,12 @@ OBJS		= $(SRCS:%.c=%.o)
 ############################################################
 ### PHONY
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 
 ############################################################
 ### Rules
 
 all: $(NAME)
-
-bonus: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
