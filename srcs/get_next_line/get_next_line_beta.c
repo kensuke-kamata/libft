@@ -6,22 +6,22 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 08:39:13 by kkamata           #+#    #+#             */
-/*   Updated: 2021/10/06 13:59:27 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/10/08 22:29:43 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 #include "../../includes/get_next_line.h"
 
-static t_gnl	return_new_line(t_fd *target, char *nptr, char **res)
+static t_gnl	set_new_line(t_fd *target, char *nptr, char **line)
 {
 	char	*tmp;
 
 	if (nptr)
 	{
-		*res = ft_strndup(target->content, nptr - (target->content));
+		*line = ft_strndup(target->content, nptr - (target->content));
 		tmp = ft_strndup(nptr + 1, ft_strlen(nptr + 1));
-		if (!*res || !tmp)
+		if (!*line || !tmp)
 			return (GNLERR);
 		free(target->content);
 		target->content = tmp;
@@ -30,10 +30,10 @@ static t_gnl	return_new_line(t_fd *target, char *nptr, char **res)
 	else
 	{
 		if (target->content && *(target->content) == '\0')
-			*res = NULL;
+			*line = NULL;
 		else
 		{
-			*res = ft_strndup(target->content, ft_strlen(target->content));
+			*line = ft_strndup(target->content, ft_strlen(target->content));
 			tmp = ft_strndup("", 0);
 			free(target->content);
 			target->content = tmp;
@@ -42,7 +42,7 @@ static t_gnl	return_new_line(t_fd *target, char *nptr, char **res)
 	}
 }
 
-static t_gnl	readfd(t_fd *target, char *buf, char **res)
+static t_gnl	readfd(t_fd *target, char *buf, char **line)
 {
 	char		*nptr;
 	char		*tmp;
@@ -65,7 +65,7 @@ static t_gnl	readfd(t_fd *target, char *buf, char **res)
 		free(target->content);
 		target->content = tmp;
 	}
-	return (return_new_line(target, nptr, res));
+	return (set_new_line(target, nptr, line));
 }
 
 int	get_next_line_beta(int fd, char **line)
